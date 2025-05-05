@@ -1,4 +1,4 @@
-# Next TypeScript App
+# Todo App using Next & TypeScript
 
 This application was built as part of a coding test with Endpoint.
 
