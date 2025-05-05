@@ -1,6 +1,6 @@
 export type TodoItemType = {
   id: string;
   description: string;
-  completed: boolean;
+  isComplete: boolean;
   dueDate: Date;
 };

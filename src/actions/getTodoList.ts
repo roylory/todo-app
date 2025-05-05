@@ -21,7 +21,7 @@ export async function getTodoList(): Promise<TodoItemType[]> {
   return data.map((todo) => ({
     id: todo.id,
     description: todo.description,
-    completed: todo.completed,
+    isComplete: todo.isComplete,
     dueDate: new Date(todo.dueDate),
   }));
 }
