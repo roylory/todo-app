@@ -17,6 +17,10 @@ async function TodoList() {
     return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
   });
 
+  if (todos.length === 0) {
+    return <div className="text-gray-500 text-center italic">You have no todos.</div>;
+  }
+
   return (
     <>
       {todos.map((todo, idx) => (
