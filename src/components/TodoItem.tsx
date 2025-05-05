@@ -7,7 +7,7 @@ interface TodoItemProps {
   id: string;
   description: string;
   isComplete: boolean;
-  dueDate: Date;
+  dueDate?: Date;
   update: (id: string, isComplete: boolean) => Promise<void>;
 }
 

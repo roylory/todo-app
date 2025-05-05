@@ -46,13 +46,19 @@ const TodoList: React.FC<TodoListProps> = ({ todos }) => {
     if (a.isComplete !== b.isComplete) {
       return a.isComplete ? 1 : -1;
     }
+    if (!a.dueDate && b.dueDate) {
+      return 1;
+    }
+    if (a.dueDate && !b.dueDate) {
+      return -1;
+    }
     const now = new Date();
-    const aOverdue = new Date(a.dueDate) < now;
-    const bOverdue = new Date(b.dueDate) < now;
+    const aOverdue = a.dueDate ? new Date(a.dueDate) < now : false;
+    const bOverdue = b.dueDate ? new Date(b.dueDate) < now : false;
     if (aOverdue !== bOverdue) {
       return aOverdue ? -1 : 1;
     }
-    return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+    return (a.dueDate ? new Date(a.dueDate).getTime() : 0) - (b.dueDate ? new Date(b.dueDate).getTime() : 0);
   });
 
   return (

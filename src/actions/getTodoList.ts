@@ -22,6 +22,6 @@ export async function getTodoList(): Promise<TodoItemType[]> {
     id: todo.id,
     description: todo.description,
     isComplete: todo.isComplete,
-    dueDate: new Date(todo.dueDate),
+    dueDate: todo.dueDate ? new Date(todo.dueDate) : undefined,
   }));
 }
