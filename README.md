@@ -2,7 +2,7 @@
 
 This application was built as part of a coding test with Endpoint.
 
-### Installation
+## Installation
 Ensure you have Node.js installed on your system. This project uses `pnpm` as the package manager, but `npm` or `yarn` should work as well.
 
 1. Install dependencies:
