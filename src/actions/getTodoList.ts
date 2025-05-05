@@ -1,6 +1,6 @@
-// getTodoList.ts
+import { TodoItemType } from "@/types/TodoItemType";
 
-export async function getTodoList() {
+export async function getTodoList(): Promise<TodoItemType[]> {
   const response = await fetch(
     "https://b0f179aa-a791-47b5-a7ca-5585ba9e3642.mock.pstmn.io/get",
     {
@@ -13,5 +13,15 @@ export async function getTodoList() {
   if (!response.ok) {
     throw new Error("Failed to fetch todo list");
   }
-  return response.json();
+  const data = await response.json();
+  if (!Array.isArray(data)) {
+    throw new Error("Invalid response format");
+  }
+
+  return data.map((todo) => ({
+    id: todo.id,
+    description: todo.description,
+    completed: todo.completed,
+    dueDate: new Date(todo.dueDate),
+  }));
 }
