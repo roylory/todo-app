@@ -3,7 +3,8 @@
 import { updateTodoItem } from "@/actions/updateTodoItem";
 import TodoItem from "@/components/TodoItem";
 import { TodoItemType } from "@/types/TodoItemType";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Note: I couldn't use form actions nor useOptimistic because it's using the mock data.
 // So I had to use local state to manage the todo items.
@@ -14,6 +15,11 @@ interface TodoListProps {
 
 const TodoList: React.FC<TodoListProps> = ({ todos }) => {
   const [items, setItems] = useState<(TodoItemType)[]>(todos);
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   const update = async (id: string, isComplete: boolean) => {
     setItems((prevItems) =>
@@ -51,18 +57,27 @@ const TodoList: React.FC<TodoListProps> = ({ todos }) => {
 
   return (
     <>
-      {sortedItems.map((item, idx) => (
-        <div key={item.id}>
-          <TodoItem
-            id={item.id}
-            description={item.description}
-            isComplete={item.isComplete}
-            dueDate={item.dueDate}
-            update={update}
-          />
-          {idx < todos.length - 1 && <hr className="border-gray-300 my-6" />}
-        </div>
-      ))}
+      <AnimatePresence>
+        {sortedItems.map((item, idx) => (
+          <motion.div
+            key={item.id}
+            layout
+            initial={hasMounted ? { opacity: 0, y: 20 } : false}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ type: "spring", stiffness: 500, damping: 30 }}
+          >
+            <TodoItem
+              id={item.id}
+              description={item.description}
+              isComplete={item.isComplete}
+              dueDate={item.dueDate}
+              update={update}
+            />
+            {idx < todos.length - 1 && <hr className="border-gray-300 my-6" />}
+          </motion.div>
+        ))}
+      </AnimatePresence>
     </>
   );
 }
