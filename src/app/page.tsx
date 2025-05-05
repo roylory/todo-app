@@ -5,7 +5,7 @@ import TodoList from '@/components/TodoList';
 export default function HomePage() {
   return (
     <div className="flex items-center justify-center">
-      <div className="flex flex-col mt-12 max-w-xl w-full mx-auto px-4">
+      <div className="flex flex-col mt-6 sm:mt-12 max-w-xl w-full mx-auto px-6">
         <Suspense fallback={<TodoListSkeleton />}>
           <TodoList />
         </Suspense>
