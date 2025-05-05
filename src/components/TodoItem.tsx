@@ -15,7 +15,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ id, description, completed, dueDate
         type="checkbox"
         checked={completed}
         readOnly
-        className={twMerge('w-5 h-5', completed && 'bg-gray-500')}
+        className="w-5 h-5 accent-gray-500 focus:ring-gray-500 cursor-pointer"
       />
       <span className={twMerge('text-base flex-1', completed && 'line-through')}>{description}</span>
       {dueDate && (
