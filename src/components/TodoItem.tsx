@@ -23,7 +23,12 @@ const TodoItem: React.FC<TodoItemProps> = ({ id, description, isComplete, dueDat
       />
       <span className={twMerge('text-base flex-1 text-gray-800 line-clamp-1', isComplete && 'line-through')}>{description}</span>
       {dueDate && (
-        <span className="text-gray-500 text-xs sm:text-sm font-mono">
+        <span
+          className={twMerge(
+            'text-xs sm:text-sm font-mono',
+            !isComplete && new Date(dueDate) < new Date() ? 'text-red-500' : 'text-gray-500'
+          )}
+        >
           Due {new Date(dueDate).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}
         </span>
       )}
